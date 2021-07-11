@@ -1,2 +1,4 @@
 # My configuration
 node_modules
+.vscode
+.public

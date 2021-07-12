@@ -72,7 +72,7 @@ router.get('/employees', async(req, res, next) => {
  * Team Employee Upate Controller
  * this will chanage the employee's team if employee is free
  */
-router.put('/employee/:id/team', async (req, res, next) => {
+router.put('/employee/:id', async (req, res, next) => {
     if (typeof req.session.managerId == 'undefined'){
         return res.json (buildError('please login as a Manager'))
     } 
@@ -88,7 +88,7 @@ router.put('/employee/:id/team', async (req, res, next) => {
  * Team Employee Delete Controller
  * this will remove the employee from this team
  */
-router.delete('/employee/:id/team', async (req, res, next) => {
+router.delete('/employee/:id', async (req, res, next) => {
     if (typeof req.session.managerId == 'undefined'){
         return res.json (buildError('please login as a Manager'))
     } 

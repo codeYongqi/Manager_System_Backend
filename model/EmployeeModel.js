@@ -24,14 +24,14 @@ async function selectEmployeeById(employeeId) {
 
 // insert an new employee into database
 async function insertEmployee (employeeInfo) {
-    const results = await query('insert into employee (name,age,phone,passwd,level)'+ 
-    ` values (\'${employeeInfo.name}\', ${employeeInfo.age},\'${employeeInfo.phone}\',\'${employeeInfo.passwd}\',${employeeInfo.level})`)
+    const results = await query('insert into employee (name,age,phone,passwd,level,team_id,free)'+ 
+    ` values (\'${employeeInfo.name}\', ${employeeInfo.age},\'${employeeInfo.phone}\',\'${employeeInfo.passwd}\',1,\'${employeeInfo.team_id}\',0)`)
     return results
 }
 
 
 async function updateEmployee (employeeInfo, employeeId) {
-    const sql = 'update employee set ' + await buildSql(employeeInfo, ',') + `whereId = ${employeeId} `  
+    const sql = 'update employee set ' + await buildSql(employeeInfo, ',') + `where id = ${employeeId} `  
     const results = await query(sql)    
     return results
 }
@@ -56,6 +56,10 @@ async function freeFromTeam( employeeId ) {
     return results;
 }
 
+/* var employeeInfo = {
+    "name":"ki"
+}
+updateEmployee(employeeInfo,1) */
 
 module.exports = {selectEmployeesByTeamId, selectEmployeesBriefInfoByTeamId,selectEmployeeByInfo, selectEmployeeById
     ,insertEmployee, updateEmployee, deleteEmployee, setTeam, freeFromTeam}

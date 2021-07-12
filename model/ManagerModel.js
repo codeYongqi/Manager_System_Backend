@@ -1,4 +1,4 @@
-const { query, dynamicSql } = require("./Mysql")
+const { query, buildSql } = require("./Mysql")
 
 async function selectAllManager() {
     const rows = await query('select * from manager')
@@ -7,7 +7,7 @@ async function selectAllManager() {
 }
 
 async function selecteManagerByInfo (managerInfo) {
-    const rows = await query(`select id from manager where phone = \'${managerInfo.phone}\' and passwd = \'${managerInfo.passwd}\'`)
+    const rows = await query(`select id,team_id from manager where phone = \'${managerInfo.phone}\' and passwd = \'${managerInfo.passwd}\'`)
     console.log(rows)
     return rows;
 } 
@@ -26,7 +26,7 @@ async function insertManager (managerInfo) {
 }
 
 async function updateManager (managerInfo, managerId) {
-    const sql = 'update manager ' + 'SET ' + await dynamicSql(managerInfo, ',') + `where id = ${managerId}` 
+    const sql = 'update manager ' + 'SET ' + await buildSql(managerInfo, ',') + `where id = ${managerId}` 
     const rows = await query(sql)
     console.log(rows)
     return rows

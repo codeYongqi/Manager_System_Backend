@@ -27,7 +27,7 @@ let query = function (sql, values) {
 }
 
 // build dynamic sql statement with params
-function dynamicSql(params, separator) {
+function buildSql(params, separator) {
     return new Promise (reslove => {
         let sql = '';
         let condArr = []
@@ -53,4 +53,4 @@ function dynamicSql(params, separator) {
     })
 }
 
-module.exports = {pool, query, dynamicSql} 
+module.exports = {pool, query, buildSql} 

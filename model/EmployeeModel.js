@@ -1,14 +1,19 @@
-const { query, dynamicSql } = require("./Mysql")
+const { query, buildSql } = require("./Mysql")
 
 // select all employees from database
-async function selectAllEmployees() {
-    const results = await query('select * from employee')
+async function selectEmployeesByTeamId(teamId) {
+    const results = await query(`select * from employee where team_id = ${teamId}`)
+    console.log(results)
     return results
 }
 
+async function selectEmployeesBriefInfoByTeamId(teamId) {
+    const results = await query(`select name,phone from employee where team_id = ${teamId}`)
+    return results
+}
 // select one employee from database
 async function selectEmployeeByInfo(employeeInfo) {
-    const results = await query(`select id from employee where phone = \'${employeeInfo.phone}\' and passwd = \'${employeeInfo.passwd}\'`)
+    const results = await query(`select id,team_id from employee where phone = \'${employeeInfo.phone}\' and passwd = \'${employeeInfo.passwd}\'`)
     return results
 } 
 
@@ -26,7 +31,7 @@ async function insertEmployee (employeeInfo) {
 
 
 async function updateEmployee (employeeInfo, employeeId) {
-    const sql = 'update employee set ' + await dynamicSql(employeeInfo, ',') + `whereId = ${employeeId} `  
+    const sql = 'update employee set ' + await buildSql(employeeInfo, ',') + `whereId = ${employeeId} `  
     const results = await query(sql)    
     return results
 }
@@ -51,9 +56,6 @@ async function freeFromTeam( employeeId ) {
     return results;
 }
 
-module.exports = {selectAllEmployees, selectEmployeeByInfo, selectEmployeeById
-    
-    
-    
-    
+
+module.exports = {selectEmployeesByTeamId, selectEmployeesBriefInfoByTeamId,selectEmployeeByInfo, selectEmployeeById
     ,insertEmployee, updateEmployee, deleteEmployee, setTeam, freeFromTeam}

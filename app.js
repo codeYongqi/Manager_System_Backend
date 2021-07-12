@@ -7,6 +7,7 @@ var usersRouter = require('./routes/Employee');
 var manageRouter = require('./routes/Manager')
 var teamRouter = require('./routes/Team');
 const session = require('express-session');
+const { buildError } = require('./utils/jsonUtils');
 
 var app = express();
 
@@ -21,12 +22,17 @@ app.use(session({
     resave: true,
     saveUninitialized: false,
     cookie:{
-        maxAge: 1000 * 3600 * 24 * 7
+        maxAge: 1000 * 3600 * 24 * 1
     }
 }))
 
 app.use('/employee', usersRouter);
 app.use('/manager', manageRouter)
 app.use('/team', teamRouter)
+
+app.use(function (req, res, next) {
+        res.status(404).json( buildError(404, 'Not found'));
+    }
+)
 
 module.exports = app;

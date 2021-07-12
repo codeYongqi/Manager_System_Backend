@@ -3,7 +3,7 @@ const { query, buildSql } = require("./Mysql")
 // select all employees from database
 async function selectEmployeesByTeamId(teamId) {
     const results = await query(`select * from employee where team_id = ${teamId}`)
-    console.log(results)
+    //console.log(rows)
     return results
 }
 
@@ -46,13 +46,13 @@ async function deleteEmployee (employeeId) {
 async function setTeam( teamId, employeeId ) {
     const sql = `update employee set team_id = ${teamId} , free = 0 where id = ${employeeId}`
     const results = await query(`update employee set team_id = ${teamId} , free = 0 where id = ${employeeId}`)
-    console.log(results)
+    //console.log(rows)
     return results;
 }
 
 async function freeFromTeam( employeeId ) {
     const results = await query(`update employee set team_id = NULL , free = 1 where id = ${employeeId}`)
-    console.log(results)
+    //console.log(rows)
     return results;
 }
 

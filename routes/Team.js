@@ -77,8 +77,8 @@ router.put('/employee/:id', async (req, res, next) => {
         return res.json (buildError('please login as a Manager'))
     } 
     try {
-        const results = await setTeam(req.body.teamId, req.params.id)
-        res.json(buildSuccess(results))
+        const results = await setTeam(req.body.team_id, req.params.id)
+        res.json(buildSuccess('successfully add employee to this team'))
     } catch (error) {
         next()
     }

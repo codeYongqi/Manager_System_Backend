@@ -6,8 +6,7 @@ var logger = require('morgan');
 var usersRouter = require('./routes/Employee');
 var manageRouter = require('./routes/Manager')
 var teamRouter = require('./routes/Team');
-const { selectEmployeeByInfo } = require('./model/employeeModel');
-const { buildSuccess } = require('./utils/jsonUtils');
+const session = require('express-session');
 
 var app = express();
 
@@ -15,19 +14,17 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
-async function login(req, res, next) {
-    const result = await selectEmployeeByInfo(req.body)
-    console.log(result)
-    if(result.length == 1){
-        req.login_level = 1
+app.use(session({
+    name: 'loginKey',
+    secret: 'manage-system',
+    resave: true,
+    saveUninitialized: false,
+    cookie:{
+        maxAge: 1000 * 3600 * 24 * 7
     }
-    next()
-}
-// app.use('/employee', login)
+}))
 
-// app.use('/', indexRouter);
 app.use('/employee', usersRouter);
 app.use('/manager', manageRouter)
 app.use('/team', teamRouter)

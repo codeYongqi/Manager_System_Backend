@@ -1,17 +1,35 @@
 var express = require('express');
+const { selectAllEmployees, setTeam, freeFromTeam } = require('../model/employeeModel');
 const { selectManagerById, updateManager, insertManager, deleteManager, selecteManagerByInfo } = require('../model/managerModel');
 var router = express.Router();
-const { buildSuccess } = require('../utils/jsonUtils');
+const { buildSuccess, buildError } = require('../utils/jsonUtils');
 
-let login_id;
-let login_level;
-
+/**
+ * Peronal Infomation Page
+ */
 router.get('/', async (req, res, next) => {
     const result = await selecteManagerByInfo(req.body)
     if (result.length == 1)  {
-        login_level = 2
-        login_id = result[0].id
-        res.json(buildSuccess(result))
+        req.session.regenerate(function (err) {
+            if (err) {
+                return res.json( buildError(2, 'login fail') )
+            }else{
+                var id = result[0].id
+                req.session.managerId = id 
+                res.json ( buildSuccess(id) )
+            }
+        })
+    }else{
+        req.json( buildError(1, 'name or password uncorrect'))
+    }
+})
+
+router.get('/employees', async(req, res, next) => {
+    if(typeof req.session.managerId != 'undefined'){
+        const result = await selectAllEmployees()
+        res.json( buildSuccess(result) )
+    }else {
+        res.json ( buildError(2, 'please login first'))
     }
 })
 
@@ -21,8 +39,7 @@ router.get('/', async (req, res, next) => {
  */
 router.post('/', async (req, res, next) => {
     const result = await insertManager(req.body)
-    res.json(buildSuccess ( {'affectedRows' : result.affectedRows} ))
-    next()
+    res.json(buildSuccess ( 'success register'))
 })
 
 /**
@@ -30,20 +47,18 @@ router.post('/', async (req, res, next) => {
  */
 router.get('/:id', async (req, res, next) => {
     var requestId = req.params.id
-    if(login_id == requestId){
+    if(requestId == req.session.managerId){
         const rows = await selectManagerById(req.params.id)
         res.json(buildSuccess(rows))
     }
-    next()
 })
 
 router.delete('/:id', async (req, res, next) => {
     var requestId = req.params.id
-    if(requestId == login_id) {
+    if(requestId == req.session.managerId) {
         const rows = await deleteManager(req.params.id)
-        res.json(buildSuccess( {'affectedRows' : rows.affectedRows} ))
+        res.json(buildSuccess( 'delete success' ))
     }
-    next()
 })
 
 /**
@@ -51,9 +66,22 @@ router.delete('/:id', async (req, res, next) => {
  * if success, will return {'affectedRows' : 1}
  */
 router.put('/:id', async (req, res, next) => {
-    const rows = await updateManager(req.body, req.params.id)
-    res.json(buildSuccess( {'affectedRows' : rows.affectedRows} ))
-    next()
+    var requestId = req.params.id
+    if(requestId == req.session.managerId) {
+        const rows = await updateManager(req.body, req.params.id)
+        res.json(buildSuccess( 'update success'))
+    }
+})
+
+
+router.put('/employee/:id/team', async (req, res, next) => {
+    const results = await setTeam(req.body.teamId, req.params.id)
+    res.json(buildSuccess(results))
+})
+
+router.delete('/employee/:id/team', async (req, res, next) => {
+    const results = await freeFromTeam(req.params.id)
+    res.json(buildSuccess('successfully remove employee from this team'))
 })
 
 module.exports = router;

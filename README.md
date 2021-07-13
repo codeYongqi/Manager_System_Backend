@@ -1,7 +1,7 @@
 # Manager_System_Backend
-## Breif Introduction
+## Brief Introduction
 
-  this is a simple server which built by Node.js and implements a series RESTful API 
+  this is a simple server built by Node.js and implements a series RESTful API 
 
   use Express as web framework
   
@@ -33,6 +33,6 @@ Now the the server is run at localhost:3000
 
 this server use Mysql as database to store the data
 
-the Mysql version is 8.0.25
+Mysql version is 8.0.25
 
 you can get mysql file [here](https://github.com/codeYongqi/Manager_System_Backend/tree/master/sql)

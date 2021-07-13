@@ -21,7 +21,7 @@
 
 `npm run start`
 
-`npm run devstart` (this command can auto reload the server when the file has changed)
+`npm run devstart` (this command can make the server auto reload when the file has changed)
 
 Now the the server is run at localhost:3000
 

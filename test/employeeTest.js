@@ -12,6 +12,9 @@ function getMoble() {
     return prefix;
 }
 
+/**
+ * API Test for employee
+ */
 describe('Employee API', () => {
     let server = app.listen(3000)
     let id

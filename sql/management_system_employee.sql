@@ -1,0 +1,59 @@
+-- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
+--
+-- Host: localhost    Database: management_system
+-- ------------------------------------------------------
+-- Server version	8.0.25
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `employee`
+--
+
+DROP TABLE IF EXISTS `employee`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `employee` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `age` int NOT NULL,
+  `phone` varchar(45) NOT NULL,
+  `passwd` varchar(45) NOT NULL,
+  `level` int NOT NULL,
+  `team_id` int DEFAULT NULL,
+  `free` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `phone_UNIQUE` (`phone`)
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `employee`
+--
+
+LOCK TABLES `employee` WRITE;
+/*!40000 ALTER TABLE `employee` DISABLE KEYS */;
+INSERT INTO `employee` VALUES (1,'ki ',21,'12333','123456',1,20,0),(2,'Leo',21,'1778855','123456',1,1,0),(26,'kirin',20,'123345','123456',1,1,0),(27,'kirin',20,'188897','123456',1,1,0),(28,'kirin',20,'188896','123456',1,1,0),(29,'kirin',20,'18966731542','123456',1,1,0),(30,'kirin',20,'18745639177','123456',1,1,0),(31,'kirin',20,'17013739264','123456',1,1,0),(32,'kirin',20,'13137860874','123456',1,1,0),(33,'kirin',20,'17033352491','123456',1,1,0),(34,'kirin',20,'13740066647','123456',1,1,0),(35,'kirin',20,'13320729017','123456',1,1,0),(36,'kirin',20,'13291207696','123456',1,1,0),(37,'zhuyongqi ',20,'13316021979','123456',1,1,0),(38,'jame ',20,'18939196884','123456',1,1,0),(39,'jame ',20,'13103867483','123456',1,1,0),(40,'jame ',20,'13348429489','123456',1,1,0),(41,'jame ',20,'17088235978','123456',1,1,0),(42,'jame ',20,'13371202734','123456',1,1,0),(43,'kirin',20,'13071129356','123456',1,1,0),(44,'kirin',20,'13510086014','123456',1,5,0),(45,'kirin',20,'13565795528','123456',1,1,0),(46,'kirin',20,'17006195882','123456',1,5,0),(47,'jame ',20,'13860757349','123456',1,1,0),(48,'kirin',20,'18704840778','123456',1,5,0),(49,'jame ',20,'18779135217','123456',1,1,0),(50,'jame ',20,'18745563089','123456',1,1,0),(51,'jame ',20,'13334341748','123456',1,1,0),(52,'jame ',20,'13133217155','123456',1,1,0),(53,'jame ',20,'13701232835','123456',1,1,0),(54,'jame ',20,'17067696479','123456',1,1,0),(55,'jame ',20,'13235752979','123456',1,1,0),(56,'jame ',20,'13277892971','123456',1,1,0),(57,'jame ',20,'18973914153','123456',1,1,0),(58,'jame ',20,'17036595251','123456',1,1,0),(59,'jame ',20,'13722869016','123456',1,1,0);
+/*!40000 ALTER TABLE `employee` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2021-07-13 11:25:06

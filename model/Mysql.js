@@ -1,4 +1,5 @@
 var mysql = require('mysql')
+
 var pool = mysql.createPool({
     host:'localhost',
     user:'root',
@@ -8,7 +9,7 @@ var pool = mysql.createPool({
 })
 
 let query = function (sql, values) {
-  return new Promise((reslove, reject) => {
+  return new Promise((resolve, reject) => {
     pool.getConnection( function (err, connection) {
       if(err){
         reject(err)
@@ -17,7 +18,7 @@ let query = function (sql, values) {
           if(err){
             reject(err)
           }else{
-            reslove(rows)
+            resolve(rows)
           }
           connection.release()
         })
@@ -28,7 +29,7 @@ let query = function (sql, values) {
 
 // build dynamic sql statement with params
 function buildSql(params, separator) {
-    return new Promise (reslove => {
+    return new Promise (resolve => {
         let sql = '';
         let condArr = []
 
@@ -49,7 +50,7 @@ function buildSql(params, separator) {
             if (i == 0) sql += condArr[i];
             else sql += separator + condArr[i]
         }
-        reslove(sql)
+        resolve(sql)
     })
 }
 

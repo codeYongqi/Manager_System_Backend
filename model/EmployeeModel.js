@@ -47,7 +47,6 @@ async function deleteEmployee (employeeId) {
 
 // chanage a line's team_id
 async function setTeam( teamId, employeeId ) {
-    const sql = `update employee set team_id = ${teamId} , free = 0 where id = ${employeeId}`
     const results = await query(`update employee set team_id = ${teamId} , free = 0 where id = ${employeeId}`)
     //console.log(rows)
     return results;

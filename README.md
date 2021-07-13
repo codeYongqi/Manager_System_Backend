@@ -1,4 +1,5 @@
 # Manager_System_Backend
+## Breif Introduction
 
 ## How to run the Server
 ### 1. Download the source code from github

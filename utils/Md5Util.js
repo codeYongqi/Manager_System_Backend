@@ -1,5 +1,9 @@
 var crypto = require('crypto')
 
+/**
+ * this an util to encode the passwd 
+ */
+
 //get random salt 
 function getRandomSalt() {
     return Math.random.toString().slice(2,5)

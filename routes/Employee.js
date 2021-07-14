@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const { insertEmployee,updateEmployee, deleteEmployee, selectEmployeeByInfo, selectEmployeeById } = require('../model/employeeModel');
-const { buildSuccess, buildError } = require('../utils/jsonUtils');
+const { buildSuccess, buildError } = require('../utils/JsonUtil');
 
 /**
  * Employee Login Controller 
